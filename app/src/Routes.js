@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRoutes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Sobre from "./pages/Sobre/Sobre";
+import Home from "./pages/Home/index";
+import Sobre from "./pages/Sobre/index";
 
 export const Routes = () => {
     return useRoutes([
