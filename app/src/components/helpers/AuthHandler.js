@@ -10,3 +10,7 @@ export const doLogin = async (token, rememberPass = false) => {
         ? Cookies.set("token", token, { expires: 999 })
         : Cookies.set("token", token);
 };
+
+export const doLogout = async () => {
+    Cookies.remove("token");
+};

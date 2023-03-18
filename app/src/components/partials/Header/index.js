@@ -2,10 +2,15 @@ import React from "react";
 import { HeaderArea } from "./styled";
 import { Link } from "react-router-dom";
 import { ReactComponent as LogoOlx } from "../../../assets/logo-olx.svg";
-import { isLogged } from "../../helpers/AuthHandler";
+import { isLogged, doLogout } from "../../helpers/AuthHandler";
 
 const Header = () => {
     const logged = isLogged();
+
+    const handleLogout = () => {
+        doLogout();
+        window.location.href = "/signin";
+    };
 
     return (
         <div>
@@ -24,7 +29,9 @@ const Header = () => {
                                         <Link to="/myaccount">Minha Conta</Link>
                                     </li>
                                     <li>
-                                        <Link to="/loggout">Sair</Link>
+                                        <button onClick={handleLogout}>
+                                            Sair
+                                        </button>
                                     </li>
                                     <li>
                                         <Link to="/postad" className="button">
