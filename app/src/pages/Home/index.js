@@ -27,14 +27,14 @@ const Home = () => {
     }, []);
 
     React.useEffect(() => {
-        const getAds = async () => {
+        const getRecentAds = async () => {
             const ads = await Api.getAds({
                 sort: "desc",
                 limit: 8,
             });
             setAdList(ads);
         };
-        getAds();
+        getRecentAds();
     }, []);
 
     return (

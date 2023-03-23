@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import qs from "qs";
 
-const BASE_API = "http://www.alunos.b7web.com.br:501";
+const BASE_API = "http://alunos.b7web.com.br:501";
 
 const apiFetchPost = async (endpoint, body) => {
     if (!body.token) {
@@ -70,7 +70,11 @@ export const Api = {
         return json.categories;
     },
     getAds: async (options) => {
-        const json = await apiFetchGet("/ads/list", options);
+        const json = await apiFetchGet("/ad/list", options);
         return json.ads;
+    },
+    getAd: async (id, other = false) => {
+        const json = await apiFetchGet("/ad/item", { id, other });
+        return json;
     },
 };
