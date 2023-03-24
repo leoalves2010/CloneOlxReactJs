@@ -75,6 +75,7 @@ export const Api = {
     },
     getAd: async (id, other = false) => {
         const json = await apiFetchGet("/ad/item", { id, other });
+        console.log(json)
         return json;
     },
 };

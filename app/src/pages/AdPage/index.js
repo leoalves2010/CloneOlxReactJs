@@ -1,4 +1,6 @@
 import React from "react";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import { useParams } from "react-router-dom";
 import { PageArea, Fake } from "./styled";
 import { Api } from "../../components/helpers/Api";
@@ -32,6 +34,18 @@ const AdPage = () => {
                     <div className="box">
                         <div className="adImage">
                             {loading && <Fake height={300} />}
+                            {adInfo.images && (
+                                <Slide>
+                                    {adInfo.images.map((image, index) => (
+                                        <div key={index} className="each-slide">
+                                            <img
+                                                src={image}
+                                                alt={image.title}
+                                            />
+                                        </div>
+                                    ))}
+                                </Slide>
+                            )}
                         </div>
                         <div className="adInfo">
                             <div className="adName">
