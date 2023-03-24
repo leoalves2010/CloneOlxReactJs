@@ -5,7 +5,7 @@ import { Item } from "./styled";
 const AdItem = ({ data }) => {
     let price = "";
 
-    if (data.priceNegotiable || price === "") {
+    if (data.priceNegotiable || data.price === "") {
         price = "Preço Negociável";
     } else {
         price = `R$ ${data.price}`;
