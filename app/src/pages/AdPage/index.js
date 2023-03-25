@@ -1,10 +1,11 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import { useParams } from "react-router-dom";
-import { PageArea, Fake } from "./styled";
+import { useParams, Link } from "react-router-dom";
+import { PageArea, Fake, OthersArea, BreadCrumb } from "./styled";
 import { Api } from "../../components/helpers/Api";
 import { PageContainer } from "../../components/MainComponents";
+import AdItem from "../../components/partials/AdItem/index";
 
 const AdPage = () => {
     const { id } = useParams();
@@ -29,6 +30,20 @@ const AdPage = () => {
 
     return (
         <PageContainer>
+            <BreadCrumb>
+                Você está aqui:
+                <Link to={"/"}>Home</Link>/
+                <Link to={`/ads?state=${adInfo.stateName}`}>
+                    {adInfo.stateName}
+                </Link>
+                /
+                <Link
+                    to={`/ads?state=${adInfo.stateName}?cat=${adInfo.category?.slug}`}
+                >
+                    {adInfo.category?.name}
+                </Link>
+                / {adInfo.title}
+            </BreadCrumb>
             <PageArea>
                 <div className="leftSide">
                     <div className="box">
@@ -103,6 +118,16 @@ const AdPage = () => {
                     )}
                 </div>
             </PageArea>
+            {adInfo.others && (
+                <OthersArea>
+                    <h2>Outros anúncios deste vendedor</h2>
+                    <div className="list">
+                        {adInfo.others.map((ad) => (
+                            <AdItem key={ad.id} data={ad} />
+                        ))}
+                    </div>
+                </OthersArea>
+            )}
         </PageContainer>
     );
 };

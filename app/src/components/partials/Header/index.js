@@ -34,7 +34,7 @@ const Header = () => {
                                         </button>
                                     </li>
                                     <li>
-                                        <Link to="/postad" className="button">
+                                        <Link to="/post-an-ad" className="button">
                                             Poste um Anúncio
                                         </Link>
                                     </li>
@@ -50,7 +50,7 @@ const Header = () => {
                                         <Link to="/signup">Cadastrar</Link>
                                     </li>
                                     <li>
-                                        <Link to="/signin" className="button">
+                                        <Link to="/post-an-ad" className="button">
                                             Poste um Anúncio
                                         </Link>
                                     </li>
