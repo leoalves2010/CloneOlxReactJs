@@ -3,6 +3,27 @@ import qs from "qs";
 
 const BASE_API = "http://alunos.b7web.com.br:501";
 
+const apiFetchFiles = async (endpoint, body) => {
+    if (!body.token) {
+        const token = Cookies.get("token");
+        if (token) body.append("token", token);
+    }
+
+    const response = await fetch(BASE_API + endpoint, {
+        method: "POST",
+        body,
+    });
+
+    const json = await response.json();
+
+    if (json.notallowed) {
+        window.location.href = "/signin";
+        return;
+    }
+
+    return json;
+};
+
 const apiFetchPost = async (endpoint, body) => {
     if (!body.token) {
         const token = Cookies.get("token");
@@ -75,7 +96,10 @@ export const Api = {
     },
     getAd: async (id, other = false) => {
         const json = await apiFetchGet("/ad/item", { id, other });
-        console.log(json)
+        return json;
+    },
+    addAd: async (fData) => {
+        const json = await apiFetchFiles("/ad/add", fData);
         return json;
     },
 };
