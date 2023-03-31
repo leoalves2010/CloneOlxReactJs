@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn/index";
 import SignUp from "./pages/SignUp/index";
 import AdPage from "./pages/AdPage/index";
 import AddAd from "./pages/AddAd/index";
+import Ads from "./pages/Ads/index";
 import { isLogged } from "./components/helpers/AuthHandler";
 
 export const Routes = () => {
@@ -18,6 +19,7 @@ export const Routes = () => {
         { path: "/signin", element: <SignIn /> },
         { path: "/signup", element: <SignUp /> },
         { path: "/ad/:id", element: <AdPage /> },
+        { path: "/ads", element: <Ads /> },
         {
             path: "/post-an-ad",
             element: logged ? <AddAd /> : <Navigate to="/signin" />,
