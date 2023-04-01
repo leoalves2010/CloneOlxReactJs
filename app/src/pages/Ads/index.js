@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { PageArea } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
 import AdItem from "../../components/partials/AdItem/index";
 import { Api } from "../../components/helpers/Api";
 
 const Home = () => {
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [stateList, setStateList] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
@@ -19,6 +20,16 @@ const Home = () => {
     const [queryCategory, setQueryCategory] = React.useState(
         searchParams.get("cat") !== null ? searchParams.get("cat") : ""
     );
+
+    React.useEffect(() => {
+        let queryString = [];
+
+        if (queryInput) queryString.push(`q=${queryInput}`);
+        if (queryState) queryString.push(`state=${queryState}`);
+        if (queryCategory) queryString.push(`cat=${queryCategory}`);
+
+        navigate(`?${queryString.join("&")}`);
+    }, [queryInput, queryState, queryCategory, navigate]);
 
     React.useEffect(() => {
         const getStates = async () => {
@@ -93,6 +104,9 @@ const Home = () => {
                                                 queryCategory === category.slug
                                                     ? "categoryItem active"
                                                     : "categoryItem"
+                                            }
+                                            onClick={() =>
+                                                setQueryCategory(category.slug)
                                             }
                                         >
                                             <img
