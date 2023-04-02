@@ -5,7 +5,9 @@ import { PageContainer } from "../../components/MainComponents";
 import AdItem from "../../components/partials/AdItem/index";
 import { Api } from "../../components/helpers/Api";
 
-const Home = () => {
+let timer;
+
+const Ads = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [stateList, setStateList] = React.useState([]);
@@ -20,6 +22,19 @@ const Home = () => {
     const [queryCategory, setQueryCategory] = React.useState(
         searchParams.get("cat") !== null ? searchParams.get("cat") : ""
     );
+    const [opacity, setOpacity] = React.useState(0.3);
+
+    const getAds = async () => {
+        const ads = await Api.getAds({
+            sort: "desc",
+            limit: 9,
+            q: queryInput,
+            state: queryState,
+            cat: queryCategory,
+        });
+        setAdList(ads);
+        setOpacity(1);
+    };
 
     React.useEffect(() => {
         let queryString = [];
@@ -29,6 +44,10 @@ const Home = () => {
         if (queryCategory) queryString.push(`cat=${queryCategory}`);
 
         navigate(`?${queryString.join("&")}`);
+
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(getAds, 1000);
+        setOpacity(0.3);
     }, [queryInput, queryState, queryCategory, navigate]);
 
     React.useEffect(() => {
@@ -45,17 +64,6 @@ const Home = () => {
             setCategories(categories);
         };
         getCategories();
-    }, []);
-
-    React.useEffect(() => {
-        const getRecentAds = async () => {
-            const ads = await Api.getAds({
-                sort: "desc",
-                limit: 8,
-            });
-            setAdList(ads);
-        };
-        getRecentAds();
     }, []);
 
     return (
@@ -87,7 +95,7 @@ const Home = () => {
                                     stateList.map((state) => (
                                         <option
                                             key={state._id}
-                                            value={state._id}
+                                            value={state.name}
                                         >
                                             {state.name}
                                         </option>
@@ -119,11 +127,18 @@ const Home = () => {
                             </ul>
                         </form>
                     </div>
-                    <div className="rightSide">...</div>
+                    <div className="rightSide">
+                        <h2>Resultados</h2>
+                        <div className="list" style={{ opacity }}>
+                            {adList.map((ad, k) => (
+                                <AdItem key={k} data={ad} />
+                            ))}
+                        </div>
+                    </div>
                 </PageArea>
             </PageContainer>
         </>
     );
 };
 
-export default Home;
+export default Ads;

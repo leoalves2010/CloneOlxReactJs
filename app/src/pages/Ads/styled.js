@@ -60,5 +60,20 @@ export const PageArea = styled.div`
 
     .rightSide {
         flex: 1;
+
+        h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .list{
+            display: flex;
+            flex-wrap: wrap;
+
+            .adItem{
+                width: 33%;
+            }
+        }
     }
 `;

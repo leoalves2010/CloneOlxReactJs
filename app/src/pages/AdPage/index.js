@@ -123,7 +123,7 @@ const AdPage = () => {
                     <h2>Outros anúncios deste vendedor</h2>
                     <div className="list">
                         {adInfo.others.map((ad) => (
-                            <AdItem key={ad.id} data={ad} />
+                            <AdItem key={ad._id} data={ad} />
                         ))}
                     </div>
                 </OthersArea>

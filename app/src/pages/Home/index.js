@@ -8,7 +8,7 @@ import { Api } from "../../components/helpers/Api";
 const Home = () => {
     const [stateList, setStateList] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
-    const [adList, setAdList] = React.useState([".", ".", "."]);
+    const [adList, setAdList] = React.useState([]);
 
     React.useEffect(() => {
         const getStates = async () => {
@@ -52,7 +52,7 @@ const Home = () => {
                                 {stateList &&
                                     stateList.map((state) => (
                                         <option
-                                            key={state.id}
+                                            key={state._id}
                                             value={state.name}
                                         >
                                             {state.name}
@@ -66,7 +66,7 @@ const Home = () => {
                         {categories &&
                             categories.map((category) => (
                                 <Link
-                                    key={category.id}
+                                    key={category._id}
                                     className="categoryItem"
                                     to={`ads?cat=${category.slug}`}
                                 >
@@ -85,8 +85,8 @@ const Home = () => {
                     <h2>Anúncios Recentes</h2>
                     <div className="list">
                         {adList &&
-                            adList.map((ad) => (
-                                <AdItem key={ad.id} data={ad} />
+                            adList.map((ad, k) => (
+                                <AdItem key={k} data={ad} />
                             ))}
                     </div>
                     <Link to={"/ads"} className="seeAllLink">
