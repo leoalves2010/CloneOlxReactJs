@@ -67,11 +67,16 @@ export const PageArea = styled.div`
             font-size: 18px;
         }
 
-        .list{
+        .msgWarning {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .list {
             display: flex;
             flex-wrap: wrap;
 
-            .adItem{
+            .adItem {
                 width: 33%;
             }
         }

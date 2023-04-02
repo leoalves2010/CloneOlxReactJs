@@ -13,6 +13,7 @@ const Ads = () => {
     const [stateList, setStateList] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
     const [adList, setAdList] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
     const [queryInput, setQueryInput] = React.useState(
         searchParams.get("q") !== null ? searchParams.get("q") : ""
     );
@@ -25,6 +26,7 @@ const Ads = () => {
     const [opacity, setOpacity] = React.useState(0.3);
 
     const getAds = async () => {
+        setLoading(true);
         const ads = await Api.getAds({
             sort: "desc",
             limit: 9,
@@ -34,6 +36,7 @@ const Ads = () => {
         });
         setAdList(ads);
         setOpacity(1);
+        setLoading(false);
     };
 
     React.useEffect(() => {
@@ -129,6 +132,15 @@ const Ads = () => {
                     </div>
                     <div className="rightSide">
                         <h2>Resultados</h2>
+                        {loading && (
+                            <div className="msgWarning">Carregando...</div>
+                        )}
+
+                        {!loading && adList.length === 0 && (
+                            <div className="msgWarning">
+                                Nenhum resultado encontrado.
+                            </div>
+                        )}
                         <div className="list" style={{ opacity }}>
                             {adList.map((ad, k) => (
                                 <AdItem key={k} data={ad} />
