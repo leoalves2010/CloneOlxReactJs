@@ -80,5 +80,28 @@ export const PageArea = styled.div`
                 width: 33%;
             }
         }
+
+        .pagination{
+            display: flex;
+
+            .pageItem{
+                display: flex;
+                padding: 5px;
+                margin-right: 5px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                font-size: 14px;
+                border: 1px solid transparent;
+                background-color: #9bb83c;
+                color: #fff;
+                cursor: pointer;
+
+                &:hover,
+                &.active{
+                    background-color: #79922b;
+                }
+            }
+        }
     }
 `;

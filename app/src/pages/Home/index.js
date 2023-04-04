@@ -28,11 +28,11 @@ const Home = () => {
 
     React.useEffect(() => {
         const getRecentAds = async () => {
-            const ads = await Api.getAds({
+            const json = await Api.getAds({
                 sort: "desc",
                 limit: 8,
             });
-            setAdList(ads);
+            setAdList(json.ads);
         };
         getRecentAds();
     }, []);

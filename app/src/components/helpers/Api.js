@@ -92,7 +92,7 @@ export const Api = {
     },
     getAds: async (options) => {
         const json = await apiFetchGet("/ad/list", options);
-        return json.ads;
+        return json;
     },
     getAd: async (id, other = false) => {
         const json = await apiFetchGet("/ad/item", { id, other });
